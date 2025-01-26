@@ -14,7 +14,7 @@ choice的整个调用链类似这样rdcore choice \<starter\> \<ender\> \<amount
 如:调用rdcore choice 1 50 5就代表在1-50之间随机选取5个整数并输出<br/>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序(0.2.0+)
 ## choicef(0.2.0+)
-choicef是choice的很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<starter\> \<ender\> \<amount\> <br>
+choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<starter\> \<ender\> \<amount\> <br>
 precison表示生成浮点数的精度(小数点后n位),由于很多原因,它是靠四舍五入来实现的，这也就有让这个指令有可能生成相同的随机数 <br>
 ** 警告:不要让传递的精度超过f64所能表示的最大精度！否则会引发未定义行为 ** <br>
 注意:此指令无法使用--sort <br>
