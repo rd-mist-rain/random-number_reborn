@@ -7,6 +7,7 @@ pub fn choice(mut arg:std::env::Args)->()
     let mut starter:i64=1;
     let mut ender:i64=50;
     let mut amount:usize=1;
+    let mut allow_sorting=false;
     if let Some(starter_str)=arg.next()
     {
         if let Ok(starter_read)=starter_str.parse::<i64>()
@@ -63,6 +64,10 @@ pub fn choice(mut arg:std::env::Args)->()
     {
         amount=(ender-starter+1) as usize;
     }
+    if let Some(sort_str)=arg.next()
+    {
+        if sort_str=="--sort" {allow_sorting=true;}
+    }
 
 let start=std::time::Instant::now();
 
@@ -73,13 +78,27 @@ let start=std::time::Instant::now();
     {
         random_numbers.insert(rng.sample(rd));
     }
-    for i in random_numbers
+    if allow_sorting
     {
-        print!("{} ",i);
+        let mut sorted_numbers:Vec<i64>=random_numbers.into_iter().collect();
+        sorted_numbers.sort();
+        for i in sorted_numbers
+        {
+            print!("{} ",i);
+        }
+        print!("\n");
     }
-    print!("\n");
+    else 
+    {
+        for i in random_numbers
+        {
+            print!("{} ",i);
+        }
+        print!("\n");
+    }
 
 let end=std::time::Instant::now();
 let duration=end-start;
 println!("time consumption:{} microseconds",duration.as_micros());
 }
+
