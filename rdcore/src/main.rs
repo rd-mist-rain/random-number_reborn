@@ -1,5 +1,6 @@
 use std::env;
 mod choice;
+mod choicef;
 fn main() 
 {
     let mut args= env::args(); //迭代器
@@ -11,6 +12,10 @@ fn main()
         "choice"=>
         {
             choice::choice(args);
+        }
+        "choicef"=>
+        {
+            choicef::choicef(args);
         }
         other=>
         {
