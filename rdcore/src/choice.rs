@@ -2,6 +2,7 @@ use rand::thread_rng;
 use rand::Rng;
 use rand::distributions::Uniform;
 use std::collections::HashSet;
+
 pub fn choice(mut arg:std::env::Args)->()
 {
     let low:i64;
