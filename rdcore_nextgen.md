@@ -10,8 +10,8 @@
 整个调用链类似这样rdcore <指令> ......(其他参数),让我在后文为你介绍一些指令吧！
 # rdcore所接受的指令
 ## choice
-choice的整个调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\><br>
-这个指令的含义是:在\<low\>(含)-\<high\>(含)之间随机选取\<amount\>个整数并输出<br>
+choice的整个调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\>\<step\>(可选,不输入则设置为1><br>
+这个指令的含义是:在\<low\>(含)-\<high\>(含)之间随机选取\<amount\>个整数并输出,且保证每一个输出结果满足step%n-low=-0(n-low能够整除step)<br>
 如:调用rdcore choice 1 50 5就代表在1-50之间随机选取5个整数并输出<br/>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序
 ## choicef
