@@ -8,6 +8,7 @@ pub fn choice(mut arg:std::env::Args)->()
     let high:i64;
     let mut amount:usize=1;
     let mut allow_sorting:bool=false;
+    let mut step:u32=1;
     if let Some(low_str)=arg.next()
     {
         if let Ok(low_read)=low_str.parse::<i64>()
@@ -22,7 +23,7 @@ pub fn choice(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("No argument found after command \"choice\", the correct syntax:rdcore choice <low> <high>");
+        eprintln!("No argument found after command \"choice\",the correct syntax:rdcore choice <low> <high>");
         return;
     }
 
@@ -40,7 +41,7 @@ pub fn choice(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("argument \"<high>\" is missing after \"choice\" , the correct syntax:rdcore choice <low> <high>");
+        eprintln!("argument \"<high>\" is missing,the correct syntax:rdcore choice <low> <high>");
         return;
     }
     
@@ -58,7 +59,23 @@ pub fn choice(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("argument \"<amount>\" is missing after \"choice\",the value amount is set to 1,you can also use the syntax:rdcore choice <low> <high> <amount>");
+        eprintln!("argument \"<amount>\" is missing,the value amount is set to 1,you can also use the syntax:rdcore choice <low> <high> <amount>");
+    }
+    if let Some(step_str)=arg.next()
+    {
+        if let Ok(step_read)=step_str.parse::<u32>()
+        {
+            step=step_read;
+        }
+        else 
+        {
+            eprintln!("failed to parse step");
+            return;
+        }
+    }
+    else 
+    {
+        eprintln!("argument \"<step>\" is missing,the value step is set to 1,you can also use the syntax:rdcore choice <low> <high> <amount> <step>")
     }
     if let Some(sort_str)=arg.next()
     {
@@ -66,17 +83,31 @@ pub fn choice(mut arg:std::env::Args)->()
     }
 
 let start=std::time::Instant::now();
-
-    let mut rng=thread_rng();
-    let rd=Uniform::new(low,high);
     if high-low<amount as i64
     {
         amount=(high-low) as usize;
     }
-    let mut random_numbers:HashSet<i64>=HashSet::with_capacity(amount);
-    while random_numbers.len()<amount
+    if high-low<step as i64 || step==0
     {
-        random_numbers.insert(rng.sample(rd));
+        step=(high-low) as u32;
+    }
+    let mut rng=thread_rng();
+    let rd=Uniform::new(low as i64,high as i64);
+    let mut random_numbers:HashSet<i64>=HashSet::with_capacity(amount);
+    if step==1
+    {
+        while random_numbers.len()<amount
+        {
+            random_numbers.insert(rng.sample(rd));
+        }
+    }
+    else
+    {
+        while random_numbers.len()<amount
+        {
+            let n=rng.sample(rd);
+            if (n-low)%step as i64==0{random_numbers.insert(n);}
+        }
     }
     if allow_sorting
     {
@@ -84,7 +115,7 @@ let start=std::time::Instant::now();
         sorted_numbers.sort();
         for i in sorted_numbers
         {
-            print!("{} ",i);
+            print!("{} ",i as i64);
         }
         print!("\n");
     }
@@ -92,7 +123,7 @@ let start=std::time::Instant::now();
     {
         for i in random_numbers
         {
-            print!("{} ",i);
+            print!("{} ",i as i64);
         }
         print!("\n");
     }
@@ -101,4 +132,3 @@ let end=std::time::Instant::now();
 let duration=end-start;
 println!("time consumption:{} microseconds",duration.as_micros());
 }
-
