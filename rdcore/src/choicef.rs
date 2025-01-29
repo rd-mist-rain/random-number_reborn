@@ -24,7 +24,7 @@ pub fn choicef(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("No argument found after command \"choicef\", the correct syntax:rdcore choicef <precision> <low> <high>");
+        eprintln!("No argument found after command \"choicef\",the correct syntax:rdcore choicef <precision> <low> <high>");
         return;
     }
     if let Some(low_str)=arg.next()
@@ -41,7 +41,7 @@ pub fn choicef(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("argument \"<low>\" is missing after \"choicef\", the correct syntax:rdcore choicef <precision> <low> <high>");
+        eprintln!("argument \"<low>\" is missing,the correct syntax:rdcore choicef <precision> <low> <high>");
         return;
     }
 
@@ -59,7 +59,7 @@ pub fn choicef(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("argument \"<high>\" is missing after \"choicef\" , the correct syntax:rdcore choicef <precision> <low> <high>");
+        eprintln!("argument \"<high>\" is missing,the correct syntax:rdcore choicef <precision> <low> <high>");
         return;
     }
     
@@ -77,7 +77,7 @@ pub fn choicef(mut arg:std::env::Args)->()
     }
     else 
     {
-        eprintln!("argument \"<amount>\" is missing after \"choicef\",the value amount is set to 1,you can also use the syntax:rdcore choicef <precision> <low> <high> <amount>");
+        eprintln!("argument \"<amount>\" is missing,the value amount is set to 1,you can also use the syntax:rdcore choicef <precision> <low> <high> <amount>");
     }
     if let Some(sort_str)=arg.next()
     {
