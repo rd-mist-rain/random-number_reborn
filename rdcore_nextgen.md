@@ -8,14 +8,24 @@
 ## 我是用户
 打开cmd,先输入程序路径(如.\rdcore.exe,下文用rdcore代指程序路径)<br>
 整个调用链类似这样rdcore <指令> ......(其他参数),让我在后文为你介绍一些指令吧！
-# rdcore所接受的指令
+# 原生rdcore所接受的指令
 ## choice
-choice的整个调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\>\<step\>(可选,不输入则设置为1><br>
+choice的调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\>\<step\>(可选,不输入则设置为1><br>
 这个指令的含义是:在\<low\>(含)-\<high\>(含)之间随机选取\<amount\>个整数并输出,且保证每一个输出结果满足step%n-low=-0(n-low能够整除step)<br>
 如:调用rdcore choice 1 50 5就代表在1-50之间随机选取5个整数并输出<br/>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序
 ## choicef
 choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<low\> \<high\> \<amount\> <br>
-**警告:不要让 high的10^precision次幂 超过i64类型的最大值！否则会引发未定义行为** <br>
+**警告:不要让 high×10^precision超过i64类型的最大值！否则会引发未定义行为** <br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序
+# rdcore的扩展功能
+rdcore在1.2.0版本新增了"扩展功能",这个功能大致是这样的:如果你输入了不是原生rdcore所接受的指令,<br>
+程序就会自动寻找.\extensions\<输入的第一个参数名>.dll并调用dll中名称为你输入的第一个参数名(即与dll文件同名)的函数,传递一个迭代器<br>
+(在代码中你可以看到,传递的参数实际上是已经消费过第一项(程序名)的args迭代器,这是所有其余文件中定义的参数名叫"arg"而非"args"的原因) <br>
+这种模式让你可以为我们的程序编写扩展功能(但只能使用Rust语言)! <br>
+我自己为程序提供了一些扩展功能的dll,你可以在我们的项目的extensions目录中找到这些dll和它们的源码 <br>
+**注意:下面所有扩展指令都需要你在rdcore.exe同级目录新建extensions文件夹并把与你要使用的指令同名的dll放进去才可以使用!**
+## mix
+mix的调用链类似这样rdcore mix ......(你要打乱的东西,数量任意)<br>
+如:调用rdcore mix 1 2 3 4 5就代表打乱1 2 3 4 5,最后程序有可能输出2 3 1 4 5或其他,这取决于打乱的结果
 
