@@ -16,7 +16,7 @@ choice的调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
 程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒
 ## choicef
-choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<low\> \<high\> \<amount\> <br>
+choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\> <br>
 **警告:不要让 high×10^precision超过i64类型的最大值！否则会引发未定义行为** <br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
 程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒
@@ -30,4 +30,9 @@ rdcore在1.2.0版本新增了"扩展功能",这个功能大致是这样的:如�
 ## mix
 mix的调用链类似这样rdcore mix ......(你要打乱的东西,数量任意)<br>
 如:调用rdcore mix 1 2 3 4 5就代表打乱1 2 3 4 5,最后程序有可能输出2 3 1 4 5或其他,这取决于打乱的结果<br>
+备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
+## choicestr
+choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取的东西,数量任意,但正常人的思路是至少有amount个)<br>
+和choice和choicef不同的是,这里的amount不可以不输入<br>
+如:调用rdcore choicestr 2 str1 str2 str3 最后的结果有可能输出str1 str2或其他,这取决于选取的结果<br>
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
