@@ -41,5 +41,5 @@ choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取
 choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
 和其他函数不同的是,这里的除了加权以外的所有参数都必须输入,当然如果你不想排序又懒得输入--unsort的话,输入一个0占位也是没什么问题的<br>
 除了加权的参数你都可以在choice的说明中找到,我要为你介绍一下加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
-choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value存在的话)<br>
-同时,当ship为0时我们做了特殊实现(它本应该是什么也不做),即去除掉value(如果value存在的话)<br>
+choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value原本就存在的话)<br>
+同时,当ship为0时我们做了特殊实现(它本应该是什么也不做),即去除掉value(如果value原本就存在的话)<br>
