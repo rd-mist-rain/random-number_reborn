@@ -33,6 +33,13 @@ mix的调用链类似这样rdcore mix ......(你要打乱的东西,数量任意)
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
 ## choicestr
 choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取的东西,数量任意,但正常人的思路是至少有amount个)<br>
-和choice和choicef不同的是,这里的amount不可以不输入<br>
+和choice和choicef不同的是,这里的amount必须输入<br>
 如:调用rdcore choicestr 2 str1 str2 str3 最后的结果有可能输出str1 str2或其他,这取决于选取的结果<br>
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
+## choiceship
+我感觉choiceship并不是很常用,加之choiceship的实现并不是高性能(目前为止自带的choice和choicef都是高性能实现),所以把它放在了扩展中<br>
+choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
+和其他函数不同的是,这里的除了加权以外的所有参数都必须输入 <br>
+除了加权的参数你都可以在choice的说明中找到,我要为你介绍一下加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
+choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value存在的话)<br>
+同时,当ship为0时我们做了特殊实现(它本应该是什么也不做),即去除掉value(如果value存在的话)<br>
