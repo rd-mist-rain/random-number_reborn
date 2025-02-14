@@ -18,9 +18,9 @@ choice的调用链类似这样**rdcore choice \<low\> \<high\> \<amount(可选,�
 ## choicef
 choicef是choice的浮点数版本,它的调用链类似这样**rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\>** <br>
 要介绍的是精度参数precision,它代表生成随机数时会精确到小数点后几位,比如传递的precision为2,就代表生成的浮点数会精确到小数点后2位<br>
+**注意:使用时不要忘记第一个参数是precision以及无需输入步长参数,这和choice是不同的!**
 
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
-**注意:使用时不要忘记第一个参数是precision以及无需输入步长参数,这和choice是不同的!**
 # rdcore的扩展功能
 rdcore在1.2.0版本新增了"扩展功能",这个功能大致是这样的:如果你输入了不是原生rdcore所接受的指令,<br>
 程序就会自动寻找.\\extensions\\<输入的第一个参数名>.dll并调用dll中名称为你输入的第一个参数名(即与dll文件同名)的函数,传递的参数是一个迭代器
