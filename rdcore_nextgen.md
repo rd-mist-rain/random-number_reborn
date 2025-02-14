@@ -39,11 +39,15 @@ choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取
 ## choiceship
 我感觉choiceship并不是很常用,所以把它放在了扩展中(但其实他应该是这些扩展中最常用的一个了吧?)<br>
 choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort --dedup/--dup \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
-和其他函数不同的是,这里的除了加权以外的所有参数都必须输入,当然如果你不想排序又懒得输入--unsort的话,输入一个0占位也是没什么问题的<br>
+和其他函数不同的是,这里的除了加权以外的所有参数都必须输入(因为有着数量不一定的权参数,我们不得不这样要求)<br>
+--sort/--unsort --dedup/--dup中间的/表示你可以在这两项之间选一个输入,当然代码只判断是否是--sort及是否是--dedup,<br>
+所以如果你不想开启排序功能或不想开启去重功能的话,随便输入些什么占位也是可以的,<br>
+只不过为了可读性考虑我才选择在说明文档中使用--unsort和--dup占位<br>
+**注意:使用时千万不要把平常易忽略的可选参数落下了!**
 
 去重参数(--dedup/--dup) 注:dedup即deduplicate(去重)的缩写,dup即duplicate(保留重复)的缩写,<br>
 如果你开启了去重(即输入的参数是--dedup),生成的随机数将不会有重复<br>
-*除了choicestr和choiceship外所有choice系列的函数默认都是去重的,我会考虑在之后的版本将选择是否去重的功能加入到choice系列的函数中*<br>
+*choice和choicef默认都是去重的,我会考虑在之后的版本将选择是否去重的功能加入到这两个函数中*<br>
 
 加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
 choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value原本就存在的话)<br>
