@@ -16,8 +16,8 @@ choice的调用链类似这样**rdcore choice \<low\> \<high\> \<amount(可选,�
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
 程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒
 ## choicef
-choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样**rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\>** <br>
-精度参数precision,它代表生成随机数时会精确到小数点后几位,比如传递的precision为2,就代表生成的浮点数会精确到小数点后2位<br>
+choicef是choice的浮点数版本,它的调用链类似这样**rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\>** <br>
+要介绍的是精度参数precision,它代表生成随机数时会精确到小数点后几位,比如传递的precision为2,就代表生成的浮点数会精确到小数点后2位<br>
 
 **警告:不要让 high×10^precision超过i64类型的最大值！否则会引发未定义行为** <br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
