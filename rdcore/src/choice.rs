@@ -93,7 +93,7 @@ let start=std::time::Instant::now();
         step=(high-low) as u32;
     }
     let mut rng=thread_rng();
-    let rd=Uniform::new(low as i64,high as i64);
+    let rd=Uniform::new(low,high);
     let mut random_numbers:HashSet<i64>=HashSet::with_capacity(amount);
     if step==1
     {
@@ -116,7 +116,7 @@ let start=std::time::Instant::now();
         sorted_numbers.sort();
         for i in sorted_numbers
         {
-            print!("{} ",i as i64);
+            print!("{} ",i);
         }
         print!("\n");
     }
@@ -124,7 +124,7 @@ let start=std::time::Instant::now();
     {
         for i in random_numbers
         {
-            print!("{} ",i as i64);
+            print!("{} ",i);
         }
         print!("\n");
     }
