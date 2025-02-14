@@ -10,13 +10,13 @@
 整个调用链类似这样rdcore <指令> ......(其他参数),让我在后文为你介绍一些指令吧！
 # 原生rdcore所接受的指令
 ## choice
-choice的调用链类似这样rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\>\<step\>(可选,不输入则设置为1><br>
+choice的调用链类似这样**rdcore choice \<low\> \<high\> \<amount(可选,不输入则设置为1)\>\<step\>(可选,不输入则设置为1>**<br>
 这个指令的含义是:在\<low\>(含)-\<high\>(含)之间随机选取\<amount\>个整数并输出,且保证每一个输出结果满足<br>(n-low)%step=0(n-low能够整除step)<br>
 如:调用rdcore choice 1 50 5就代表在1-50之间随机选取5个整数并输出<br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
 程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒
 ## choicef
-choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\> <br>
+choicef是choice的浮点数版本,很类似于choice,它的调用链类似这样**rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\>** <br>
 精度参数precision,它代表生成随机数时会精确到小数点后几位,比如传递的precision为2,就代表生成的浮点数会精确到小数点后2位<br>
 
 **警告:不要让 high×10^precision超过i64类型的最大值！否则会引发未定义行为** <br>
@@ -31,17 +31,17 @@ rdcore在1.2.0版本新增了"扩展功能",这个功能大致是这样的:如�
 我自己为程序提供了一些扩展功能的dll,你可以在我们的项目的extensions目录中找到这些dll和它们的源码 <br>
 **注意:下面所有扩展指令都需要你在rdcore.exe同级目录新建extensions文件夹并把与你要使用的指令同名的dll放进去才可以使用!**
 ## mix
-mix的调用链类似这样rdcore mix ......(你要打乱的东西,数量任意)<br>
+mix的调用链类似这样**rdcore mix ......(你要打乱的东西,数量任意)** <br>
 如:调用rdcore mix 1 2 3 4 5就代表打乱1 2 3 4 5,最后程序有可能输出2 3 1 4 5或其他,这取决于打乱的结果<br>
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
 ## choicestr
-choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取的东西,数量任意,但正常人的思路是至少有amount个)<br>
+choicestr的调用链类似这样**rdcore choicestr \<amount\> ......(你要选取的东西,数量任意,但正常人的思路是至少有amount个)** <br>
 和choice和choicef不同的是,这里的amount必须输入<br>
 如:调用rdcore choicestr 2 str1 str2 str3 最后的结果有可能输出str1 str2或其他,这取决于选取的结果<br>
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
 ## choiceship
 我感觉choiceship并不是很常用,所以把它放在了扩展中(但其实他应该是这些扩展中最常用的一个了吧?)<br>
-choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort --dedup/--dup \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
+choiceship的调用链类似这样**rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort --dedup/--dup \<value1\>-\<ship1\> \<value2\>-\<ship2\>...** <br>
 和其他函数不同的是,这里的除了加权以外的所有参数都必须输入(因为有着数量不一定的权参数,我们不得不这样要求)<br>
 --sort/--unsort --dedup/--dup中间的/表示你可以在这两项之间选一个输入,当然代码只判断是否是--sort及是否是--dedup,<br>
 所以如果你不想开启排序功能或不想开启去重功能的话,随便输入些什么占位也是可以的,<br>
