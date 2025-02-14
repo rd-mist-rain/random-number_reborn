@@ -37,9 +37,14 @@ choicestr的调用链类似这样rdcore choicestr \<amount\> ......(你要选取
 如:调用rdcore choicestr 2 str1 str2 str3 最后的结果有可能输出str1 str2或其他,这取决于选取的结果<br>
 备注:Rust的rand crate已经有shuffle方法,而这个扩展也是用shuffle方法实现的,这个调用非常简单,所以如果你是Rust的开发者,你可以不必启用这个扩展
 ## choiceship
-我感觉choiceship并不是很常用,加之choiceship的实现并不是高性能(目前为止自带的choice和choicef都是高性能实现),所以把它放在了扩展中<br>
-choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
+我感觉choiceship并不是很常用,所以把它放在了扩展中(但其实他应该是这些扩展中最常用的一个了吧?)<br>
+choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> \<step\> --sort/--unsort --dedup/--dup \<value1\>-\<ship1\> \<value2\>-\<ship2\>... <br>
 和其他函数不同的是,这里的除了加权以外的所有参数都必须输入,当然如果你不想排序又懒得输入--unsort的话,输入一个0占位也是没什么问题的<br>
-除了加权的参数你都可以在choice的说明中找到,我要为你介绍一下加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
+
+去重参数(--dedup/--dup) 注:dedup即deduplicate(去重)的缩写,dup即duplicate(保留重复)的缩写,<br>
+如果你开启了去重(即输入的参数是--dedup),生成的随机数将不会有重复<br>
+*除了choicestr和choiceship外所有choice系列的函数默认都是去重的,我会考虑在之后的版本将选择是否去重的功能加入到choice系列的函数中*<br>
+
+加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
 choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value原本就存在的话)<br>
 同时,当ship为0时我们做了特殊实现(它本应该是什么也不做),即去除掉value(如果value原本就存在的话)<br>
