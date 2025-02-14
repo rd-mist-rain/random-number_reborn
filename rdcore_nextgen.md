@@ -14,14 +14,12 @@ choice的调用链类似这样**rdcore choice \<low\> \<high\> \<amount(可选,�
 这个指令的含义是:在\<low\>(含)-\<high\>(含)之间随机选取\<amount\>个整数并输出,且保证每一个输出结果满足<br>(n-low)%step=0(n-low能够整除step)<br>
 如:调用rdcore choice 1 50 5就代表在1-50之间随机选取5个整数并输出<br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
-程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒
 ## choicef
 choicef是choice的浮点数版本,它的调用链类似这样**rdcore choicef \<precision\> \<low\> \<high\> \<amount(可选)\>** <br>
 要介绍的是精度参数precision,它代表生成随机数时会精确到小数点后几位,比如传递的precision为2,就代表生成的浮点数会精确到小数点后2位<br>
 
 **警告:不要让 high×10^precision超过i64类型的最大值！否则会引发未定义行为** <br>
 ·此外,你还可以在所有参数之后附加一个--sort来让程序将输出的结果按照递增来排序<br>
-程序还为choice默认提供了一个计时器功能,即计算开始生成随机数到打印所消耗的时间,单位微秒<br>
 **注意:使用时不要忘记第一项是precision以及不要输入步长参数,这和choice是不同的!**
 # rdcore的扩展功能
 rdcore在1.2.0版本新增了"扩展功能",这个功能大致是这样的:如果你输入了不是原生rdcore所接受的指令,<br>
