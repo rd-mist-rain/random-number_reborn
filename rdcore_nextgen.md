@@ -47,7 +47,7 @@ choiceship的调用链类似这样rdcore choiceship \<low\> \<high\> \<amount\> 
 
 去重参数(--dedup/--dup) 注:dedup即deduplicate(去重)的缩写,dup即duplicate(保留重复)的缩写,<br>
 如果你开启了去重(即输入的参数是--dedup),生成的随机数将不会有重复<br>
-*choice和choicef默认都是去重的,我会考虑在之后的版本将选择是否去重的功能加入到这两个函数中*<br>
+*choice和choicef默认是去重的,只有choiceship提供了可选的去重参数*<br>
 
 加权参数,即\<value1\>-\<ship1\> \<value2\>-\<ship2\>...部分<br>
 choiceship的实现是根据前面所有的参数生成一个Vec,然后根据加权参数将\<ship\>个\<value\>加入Vec(如果value原本就存在的话)<br>
