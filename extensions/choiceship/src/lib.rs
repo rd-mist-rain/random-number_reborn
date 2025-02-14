@@ -166,7 +166,7 @@ pub extern "C" fn choiceship(mut arg:std::env::Args) -> ()
             while random_numbers.len()<amount
             {
                 let mut n=rng.sample(rd);
-                if (n-low)%step as i64!=0 && remove_nums.contains(&n) {continue;}
+                if remove_nums.contains(&n) {continue;}
                 for i in mappings.keys()
                 {
                     if i.contains(&n)
@@ -175,7 +175,7 @@ pub extern "C" fn choiceship(mut arg:std::env::Args) -> ()
                         break;
                     }
                 }
-                random_numbers.insert(n);
+                if (n-low)%step as i64==0 {random_numbers.insert(n);}
             }
         }
         if allow_sorting 
@@ -226,7 +226,7 @@ pub extern "C" fn choiceship(mut arg:std::env::Args) -> ()
             while random_numbers.len()<amount
             {
                 let mut n=rng.sample(rd);
-                if (n-low)%step as i64!=0 && remove_nums.contains(&n) {continue;}
+                if remove_nums.contains(&n) {continue;}
                 for i in mappings.keys()
                 {
                     if i.contains(&n)
@@ -235,7 +235,7 @@ pub extern "C" fn choiceship(mut arg:std::env::Args) -> ()
                         break;
                     }
                 }
-                random_numbers.push(n);
+                if (n-low)%step as i64==0 {random_numbers.push(n);}
             }
         }
         if allow_sorting {random_numbers.sort();}
