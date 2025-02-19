@@ -131,7 +131,7 @@ pub extern "C" fn choiceship(mut arg:std::env::Args) -> ()
     }
     if high-low<step as i64 || step==0
     {
-        step=(high+sum_ships as i64-low) as u32;
+        step=1;
     }
 
 
