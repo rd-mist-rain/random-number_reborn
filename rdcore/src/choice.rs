@@ -90,7 +90,7 @@ let start=std::time::Instant::now();
     }
     if high-low<step as i64 || step==0
     {
-        step=(high-low) as u32;
+        step=1;
     }
     let mut rng=thread_rng();
     let rd=Uniform::new(low,high);
